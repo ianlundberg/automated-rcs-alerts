@@ -1,0 +1,12 @@
+{
+  "name": "personal",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Personal website for Ian Lundberg — homepage and project portfolio (served at the site root).",
+  "license": "MIT",
+  "deployPath": "/",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}

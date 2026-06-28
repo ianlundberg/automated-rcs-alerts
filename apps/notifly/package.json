@@ -1,0 +1,12 @@
+{
+  "name": "notifly",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Notifly — branded RCS alert feeds. Umbrella landing for the Notifly project (served at /notifly/).",
+  "license": "MIT",
+  "deployPath": "/notifly",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}

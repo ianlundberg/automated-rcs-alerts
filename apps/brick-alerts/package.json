@@ -4,6 +4,7 @@
   "private": true,
   "description": "Landing page, Terms of Service, and Privacy Policy for the Notifly • Bricks RCS messaging feed, hosted via GitHub Pages.",
   "license": "MIT",
+  "deployPath": "/notifly/brick-alerts",
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/serve.mjs"

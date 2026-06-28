@@ -1,0 +1,4 @@
+# Personal site — public and indexable.
+# Notifly and its feeds set their own per-page noindex directives.
+User-agent: *
+Allow: /

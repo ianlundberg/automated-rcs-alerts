@@ -1,8 +1,8 @@
 name: Deploy legal docs to GitHub Pages
 
 # Builds every app in the monorepo and publishes the combined site to GitHub Pages.
-# Each app is served under its own path (e.g. /brick-alerts/); site-root/ is the
-# umbrella landing at the root. Pages source = GitHub Actions
+# Each app is served at the "deployPath" set in its package.json
+# (apps/personal -> /, apps/notifly -> /notifly/). Pages source = GitHub Actions
 # (Repo Settings -> Pages -> Build and deployment -> Source: GitHub Actions).
 
 on:
@@ -10,7 +10,6 @@ on:
     branches: [main]
     paths:
       - "apps/**"
-      - "site-root/**"
       - "scripts/**"
       - "package.json"
       - "turbo.json"

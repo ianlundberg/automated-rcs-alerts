@@ -1,27 +1,29 @@
 # automated-rcs-alerts
 
-A monorepo for automated **RCS (Rich Communication Services) alert feeds**,
-managed with [Turborepo](https://turborepo.com) on top of npm workspaces.
+A small monorepo that powers **Ian Lundberg's personal site and projects**,
+managed with [Turborepo](https://turborepo.com) on npm workspaces and published
+to a single GitHub Pages site.
 
-Each alert feed is its own app under `apps/`, with its own legal documents
-(Terms of Service + Privacy Policy). All apps are published to a single GitHub
-Pages site — each under its own subpath — so every feed has stable URLs to submit
-to Twilio when registering its RCS sender.
+Every app under `apps/` declares where it is served via a `deployPath` in its
+`package.json`, and a build step assembles them all into one site:
 
-Feeds live under the **Notifly** umbrella brand and share a common design system;
-each feed page also carries its own visual theme matching its vertical (e.g., the
-Bricks feed is warm red & amber, while Notifly's umbrella is indigo/violet).
+| App | deployPath | URL |
+| --- | --- | --- |
+| `apps/personal` | `/` | https://ianlundberg.github.io/automated-rcs-alerts/ |
+| `apps/notifly` | `/notifly` | https://ianlundberg.github.io/automated-rcs-alerts/notifly/ |
+| `apps/brick-alerts` | `/notifly/brick-alerts` | https://ianlundberg.github.io/automated-rcs-alerts/notifly/brick-alerts/ |
 
 ## What's here
 
 ```
 automated-rcs-alerts/
 ├── apps/
-│   └── brick-alerts/            # Notifly • Bricks feed (landing + ToS + Privacy)
+│   ├── personal/                # Ian Lundberg's personal homepage      -> /
+│   ├── notifly/                 # Notifly project landing               -> /notifly/
+│   └── brick-alerts/            # Notifly • Bricks feed (+ ToS/Privacy)  -> /notifly/brick-alerts/
 ├── packages/                    # Shared libraries (added as the repo grows)
-├── site-root/                   # Notifly umbrella landing (served at the site root)
 ├── scripts/
-│   └── assemble-site.mjs        # Combines every app's build into one Pages site
+│   └── assemble-site.mjs        # Combines each app's build into one site by deployPath
 ├── .github/workflows/
 │   └── deploy-pages.yml         # Builds & publishes the combined site to Pages
 ├── package.json                 # Workspaces + Turborepo task runner
@@ -29,36 +31,33 @@ automated-rcs-alerts/
 └── LICENSE
 ```
 
-## Live URLs
+## Notifly • Bricks feed URLs (for Twilio)
 
-The combined site is published at `https://ianlundberg.github.io/automated-rcs-alerts/`.
-Each feed lives under its own path:
+The legal docs to submit when registering the **Notifly • Bricks** RCS sender:
 
-| Page | URL |
-| --- | --- |
-| Notifly — landing | `https://ianlundberg.github.io/automated-rcs-alerts/` |
-| Notifly • Bricks — feed landing | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/` |
-| Notifly • Bricks — Terms of Service | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/terms/` |
-| Notifly • Bricks — Privacy Policy | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/privacy/` |
+- Terms: `https://ianlundberg.github.io/automated-rcs-alerts/notifly/brick-alerts/terms/`
+- Privacy: `https://ianlundberg.github.io/automated-rcs-alerts/notifly/brick-alerts/privacy/`
 
-## Adding a new feed
+## Design & theming
 
-1. Copy `apps/brick-alerts/` to `apps/<your-feed>/` (or scaffold a new app with a
-   `package.json` and a `public/` folder).
-2. Set its `package.json` `name`, and edit its `public/` documents.
-3. Push. The deploy workflow builds every app and publishes it under
-   `/<your-feed>/` automatically — no workflow changes needed.
+All apps share one dependency-free design system (light/dark). Each app can carry
+its own accent by appending token overrides to the bottom of its `styles.css`:
+the personal site is **emerald/teal**, Notifly's umbrella is **indigo/violet**, and
+the Bricks feed is **warm red/amber**.
 
-> One legal entity (one EIN) can run many feeds as separate RCS senders — keep
-> each feed a **distinct use case**. Only split a feed into its own brand/LLC if
-> you want it to stand alone as an independent business.
+## Adding a new app (project or feed)
+
+1. Create `apps/<name>/` with a `public/` folder and a `package.json` that sets a
+   `deployPath` (e.g. `/notifly/cards`).
+2. Copy `scripts/{build,serve}.mjs` from an existing app.
+3. Push. The workflow builds every app and publishes it at its `deployPath` — no
+   workflow changes needed.
 
 ## Prerequisites
 
 - **Node.js ≥ 18** (Node 20 recommended — see [`.nvmrc`](.nvmrc)).
   > Node is **not currently installed** on this machine. You don't need it to
-  > preview the docs (just open the HTML files), and GitHub's runners provide
-  > Node for the Pages deployment.
+  > preview the HTML files, and GitHub's runners provide Node for deployment.
 
 ## Common commands
 
@@ -69,25 +68,15 @@ npm run build:pages    # build every app + assemble the combined site/ folder
 npm run dev            # run every app's dev server
 ```
 
-Target one app:
-
-```bash
-npm run build -- --filter=brick-alerts
-npm run dev   -- --filter=brick-alerts
-```
-
 ## How publishing works
 
 [`.github/workflows/deploy-pages.yml`](.github/workflows/deploy-pages.yml) runs on
-every push to `main` that touches an app, `site-root/`, or the build setup. It:
+every push to `main` that touches an app or the build setup. It builds all apps,
+runs [`scripts/assemble-site.mjs`](scripts/assemble-site.mjs) to place each app's
+`dist/` at its `deployPath`, then deploys the combined `site/` to GitHub Pages.
 
-1. builds all apps (`turbo run build` → each `apps/<name>/dist`),
-2. runs [`scripts/assemble-site.mjs`](scripts/assemble-site.mjs) to copy
-   `site-root/` to the site root and each `apps/<name>/dist` into `site/<name>/`,
-3. deploys the combined `site/` folder to GitHub Pages.
-
-**Pages is already enabled** for this repo (Settings → Pages → Source =
-GitHub Actions), so pushes deploy automatically.
+**Pages is already enabled** (Settings → Pages → Source = GitHub Actions), so
+pushes deploy automatically.
 
 ## License
 
