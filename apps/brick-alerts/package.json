@@ -2,7 +2,7 @@
   "name": "brick-alerts",
   "version": "0.1.0",
   "private": true,
-  "description": "Legal documents (Terms of Service and Privacy Policy) for the Brick Alerts RCS messaging program, hosted via GitHub Pages.",
+  "description": "Landing page, Terms of Service, and Privacy Policy for the Notifly • Bricks RCS messaging feed, hosted via GitHub Pages.",
   "license": "MIT",
   "scripts": {
     "build": "node scripts/build.mjs",

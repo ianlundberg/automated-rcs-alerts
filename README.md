@@ -8,14 +8,18 @@ Each alert feed is its own app under `apps/`, with its own legal documents
 Pages site — each under its own subpath — so every feed has stable URLs to submit
 to Twilio when registering its RCS sender.
 
+Feeds live under the **Notifly** umbrella brand and share a common design system;
+each feed page also carries its own visual theme matching its vertical (e.g., the
+Bricks feed is warm red & amber, while Notifly's umbrella is indigo/violet).
+
 ## What's here
 
 ```
 automated-rcs-alerts/
 ├── apps/
-│   └── brick-alerts/            # First feed: LEGO/brick alerts (ToS + Privacy)
+│   └── brick-alerts/            # Notifly • Bricks feed (landing + ToS + Privacy)
 ├── packages/                    # Shared libraries (added as the repo grows)
-├── site-root/                   # Umbrella landing page (served at the site root)
+├── site-root/                   # Notifly umbrella landing (served at the site root)
 ├── scripts/
 │   └── assemble-site.mjs        # Combines every app's build into one Pages site
 ├── .github/workflows/
@@ -32,9 +36,10 @@ Each feed lives under its own path:
 
 | Page | URL |
 | --- | --- |
-| Umbrella landing | `https://ianlundberg.github.io/automated-rcs-alerts/` |
-| Brick Alerts — Terms of Service | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/terms/` |
-| Brick Alerts — Privacy Policy | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/privacy/` |
+| Notifly — landing | `https://ianlundberg.github.io/automated-rcs-alerts/` |
+| Notifly • Bricks — feed landing | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/` |
+| Notifly • Bricks — Terms of Service | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/terms/` |
+| Notifly • Bricks — Privacy Policy | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/privacy/` |
 
 ## Adding a new feed
 

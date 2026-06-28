@@ -1,67 +1,54 @@
-# brick-alerts
+# brick-alerts — Notifly • Bricks
 
-The legal documents for the **Brick Alerts** RCS messaging program — a
-**Terms of Service** and a **Privacy Policy** — published as a small static site
-and served under this app's path on the shared GitHub Pages site, so the URLs can
-be submitted to Twilio when registering its RCS sender.
+The **Bricks** feed of [Notifly](../../README.md): its landing page plus the
+**Terms of Service** and **Privacy Policy** for the feed's RCS sender. Published
+under `/brick-alerts/` on the shared GitHub Pages site, so the URLs can be
+submitted to Twilio when registering the **Notifly • Bricks** sender.
 
-> **Brick Alerts is an independent, unofficial service.** It is **not affiliated
-> with the LEGO Group**. "LEGO" appears only as the *subject* of alerts (used
-> nominatively in message content), never as the brand, sender name, or logo.
+> **Independent & unofficial.** Not affiliated with the LEGO Group. "LEGO"
+> appears only as the *subject* of alerts (nominative, in message content),
+> never as the sender name, brand, or logo.
+
+## Theme
+
+This feed uses the shared Notifly design system, with a warm **brick red & amber**
+theme appended to the bottom of its `styles.css` — so the feed matches its vertical
+while staying consistent with Notifly. Every feed can carry its own theme this way.
 
 ## Hosted URLs
 
-Each app in this monorepo is published under its own subpath of the Pages site
-(see the root [`README.md`](../../README.md)):
+| Page | URL |
+| ---- | --- |
+| Feed landing | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/` |
+| Terms of Service | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/terms/` |
+| Privacy Policy | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/privacy/` |
 
-| Document         | URL                                                                        |
-| ---------------- | -------------------------------------------------------------------------- |
-| Landing page     | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/`         |
-| Terms of Service | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/terms/`   |
-| Privacy Policy   | `https://ianlundberg.github.io/automated-rcs-alerts/brick-alerts/privacy/` |
-
-> **These URLs are unlisted.** Every page sends a `noindex` directive and no page
-> links to the legal documents, so they won't be indexed or found by browsing —
-> share the links directly with Twilio. (`noindex` doesn't block direct access,
-> so Twilio/Google can still load them for review.) Because the repo is public,
-> the URLs are visible in the source; to make them truly unguessable, make the
-> repo private (GitHub Pro) and move the docs to a random path.
+> **The legal pages are unlisted:** every page is `noindex` and nothing links to
+> the Terms/Privacy — share those URLs directly with Twilio. (`noindex` doesn't
+> block direct access, so reviewers can still load them.)
 
 ## Structure
 
 ```
 apps/brick-alerts/
-├── public/                 # Source of the static site (published under /brick-alerts/)
-│   ├── index.html          # Landing page (no links/buttons to the legal docs)
+├── public/
+│   ├── index.html          # Feed landing (brick theme; no links to legal docs)
 │   ├── terms/index.html    # Terms of Service
 │   ├── privacy/index.html  # Privacy Policy
-│   ├── styles.css          # Shared styling
+│   ├── styles.css          # Notifly base design + brick-feed theme
 │   ├── robots.txt
 │   └── .nojekyll
-├── scripts/
-│   ├── build.mjs           # Copies public/ -> dist/ (zero dependencies)
-│   └── serve.mjs           # Tiny local preview server (zero dependencies)
+├── scripts/                # build.mjs (public -> dist) + serve.mjs (local preview)
 └── package.json
 ```
 
-## Previewing locally
-
-- **No tooling required:** open `public/index.html` directly in your browser.
-- **With Node installed:** run `npm run dev` from this folder, then open
-  <http://localhost:4321>.
-
-## Building
-
-`npm run build` copies `public/` to `dist/`. The root deploy workflow builds
-every app and assembles them into the combined Pages site, each under its own
-path.
-
 ## ✅ Review before submitting to Twilio
 
-1. **Sender name & logo** — use **"Brick Alerts"** and your **own** logo. Never
-   use the LEGO name or logo as the sender identity — that fails Google's brand
-   verification and is a trademark risk.
-2. **Operator / legal name** — currently "Ian Lundberg" (sole proprietor).
+1. **Sender display name & logo** — use **"Notifly • Bricks"** (neutral "Bricks",
+   not "LEGO") and your **own** logo. Keep trademarks out of the sender identity;
+   reference LEGO® only in message content. Using the LEGO name/logo as the sender
+   fails Google's brand verification and is a trademark risk.
+2. **Operator / legal name** — "Ian Lundberg" (sole proprietor).
 3. **Contact email** — `lettersfromian@gmail.com`.
 4. **Governing law** — State of Texas, United States ✅.
 5. **Optional mailing address** — the `[optional mailing address]` placeholder
