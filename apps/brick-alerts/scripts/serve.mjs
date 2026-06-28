@@ -55,5 +55,5 @@ const server = createServer(async (req, res) => {
 });
 
 server.listen(port, () => {
-  console.log(`Serving apps/claude-lego-alerts/public at http://localhost:${port}`);
+  console.log(`Serving apps/brick-alerts/public at http://localhost:${port}`);
 });

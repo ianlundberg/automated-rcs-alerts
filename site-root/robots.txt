@@ -1,0 +1,6 @@
+# Ask search engines not to crawl this site.
+# The per-page <meta name="robots" content="noindex"> tags are the effective
+# control on github.io project sites; this file is kept for completeness and in
+# case a custom domain is used later.
+User-agent: *
+Disallow: /

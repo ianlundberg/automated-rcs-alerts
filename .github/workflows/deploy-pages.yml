@@ -1,14 +1,17 @@
 name: Deploy legal docs to GitHub Pages
 
-# Builds the claude-lego-alerts static site and publishes it to GitHub Pages.
-# Pages must be configured to deploy from "GitHub Actions"
+# Builds every app in the monorepo and publishes the combined site to GitHub Pages.
+# Each app is served under its own path (e.g. /brick-alerts/); site-root/ is the
+# umbrella landing at the root. Pages source = GitHub Actions
 # (Repo Settings -> Pages -> Build and deployment -> Source: GitHub Actions).
 
 on:
   push:
     branches: [main]
     paths:
-      - "apps/claude-lego-alerts/**"
+      - "apps/**"
+      - "site-root/**"
+      - "scripts/**"
       - "package.json"
       - "turbo.json"
       - ".github/workflows/deploy-pages.yml"
@@ -43,8 +46,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build the static site
-        run: npm run build -- --filter=claude-lego-alerts
+      - name: Build all apps and assemble the combined site
+        run: npm run build:pages
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
@@ -54,7 +57,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: apps/claude-lego-alerts/dist
+          path: site
 
   deploy:
     needs: build

@@ -15,7 +15,9 @@
   ],
   "scripts": {
     "build": "turbo run build",
-    "dev": "turbo run dev"
+    "dev": "turbo run dev",
+    "site": "node scripts/assemble-site.mjs",
+    "build:pages": "turbo run build && node scripts/assemble-site.mjs"
   },
   "devDependencies": {
     "turbo": "^2.5.0"
