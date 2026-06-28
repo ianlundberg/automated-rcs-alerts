@@ -1,0 +1,10 @@
+# Ask search engines not to crawl this site.
+#
+# NOTE: For a GitHub Pages PROJECT site
+# (ianlundberg.github.io/automated-rcs-alerts/), crawlers only read robots.txt
+# from the domain root (ianlundberg.github.io/robots.txt), not from this project
+# path. So the per-page <meta name="robots" content="noindex"> tag is what
+# actually keeps these pages out of search results. This file is kept for
+# completeness and in case a custom domain is used later.
+User-agent: *
+Disallow: /

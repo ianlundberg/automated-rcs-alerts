@@ -1,0 +1,11 @@
+{
+  "name": "claude-lego-alerts",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Legal documents (Terms of Service and Privacy Policy) for the Claude Lego Alerts RCS messaging program, hosted via GitHub Pages.",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "node scripts/serve.mjs"
+  }
+}

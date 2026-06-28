@@ -1,0 +1,23 @@
+{
+  "name": "automated-rcs-alerts",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Monorepo for automated RCS alerting projects.",
+  "license": "MIT",
+  "author": "Ian Lundberg",
+  "packageManager": "npm@10.8.2",
+  "engines": {
+    "node": ">=18"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev"
+  },
+  "devDependencies": {
+    "turbo": "^2.5.0"
+  }
+}
